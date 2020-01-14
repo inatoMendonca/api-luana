@@ -8,6 +8,11 @@ const app = express();
 
 const hostname = "127.0.0.1"; //Localhost
 
+app.get('/', function(req, res){
+    res.redirect('/home/agendamentos');
+ });
+
+
 app.use(express.json());
 
 app.use('/api', rotas);// endereço raiz de todas as rotas da aplicação (prefixo)
