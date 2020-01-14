@@ -23,7 +23,7 @@ app.use((error, request, response, next) => {
 });
 
 // Todas as vezes que subir a API, esse método é executado, recriando as tables todas as vezes que iniciado
-sequelize.sync({force: true}).then(() => {
+sequelize.sync({force: false}).then(() => {
     const port = process.env.PORT || 3000;
 
     app.set("port", port);
