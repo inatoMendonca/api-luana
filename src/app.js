@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/api', rotas);// endereço raiz de todas as rotas da aplicação (prefixo)
-//app.use(express.static(__dirname + '/src'));
+app.use(express.static(__dirname + '/src'));
 
 // middleware que retorna um 404 caso de erro na requisição
 app.use((request, response, next) => {
