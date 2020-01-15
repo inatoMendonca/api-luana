@@ -37,5 +37,5 @@ sequelize.sync({force: false}).then(() => {
 
     const server = http.createServer(app);
 
-    server.listen(port);
+    //server.listen(port);
 });// O objeto pega o banco que existe e cria uma table de acordo com os campos do model
