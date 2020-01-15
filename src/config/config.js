@@ -12,7 +12,7 @@ module.exports =  {
     production: {
         database: {
             host: process.env.DB_HOST,
-            port: process.env.DB_PORT,
+            port: process.env.PORT,
             dialect: 'mysql',
         }
     }
