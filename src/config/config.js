@@ -14,6 +14,7 @@ module.exports =  {
             host: 'us-cdbr-iron-east-05.cleardb.net',
             port: process.env.PORT,
             dialect: 'mysql',
+            password: '2472749d'
         }
     }
 }
