@@ -11,7 +11,7 @@ module.exports =  {
     },
     production: {
         database: {
-            host: process.env.DB_HOST,
+            host: 'us-cdbr-iron-east-05.cleardb.net',
             port: process.env.PORT,
             dialect: 'mysql',
         }
