@@ -52,7 +52,7 @@ exports.buscarTodos = (request, response, next) => { // Método que busca todos 
     limite = limite > ITENS_POR_PAGINA || limite <= 0 ? ITENS_POR_PAGINA : limite;
     pagina = pagina <= 0 ? 0 : pagina * limite;
 
-    Agendamento.findAll({limit: limite, offset: pagina, order: [['diaAgendamento']]}).then(agendamentos => { // Busca vários registros no banco que recebe um objeto com limit e offset, paginando os itens
+    Agendamento.findAll({limit: limite, offset: pagina, order: [['diaAgendamento'],['inicioAgendamento']]}).then(agendamentos => { // Busca vários registros no banco que recebe um objeto com limit e offset, paginando os itens
         response.send(agendamentos);
     }).catch(error => next(error));
 };
