@@ -6,7 +6,7 @@ exports.buscarNome = (request, response, next) => {
     const name = request.params.name;
 
 
-    Agendamento.findAll({where: {nomeCliente: `${name}`}}).then(agendamento => {
+    Agendamento.findAll({where: {nomeCliente: `${name}`}, order: [['diaAgendamento'],['inicioAgendamento']]}).then(agendamento => {
         if(agendamento) {
             response.send(agendamento);
         } else {
@@ -18,7 +18,7 @@ exports.buscarNome = (request, response, next) => {
 exports.buscarData = (request, response, next) => {
     const data = request.params.data;
     
-    Agendamento.findAll({where: {diaAgendamento: `${data}`}}).then(agendamento => {
+    Agendamento.findAll({where: {diaAgendamento: `${data}`}, order: [['diaAgendamento'],['inicioAgendamento']]}).then(agendamento => {
         if(agendamento) {
             response.send(agendamento);
         } else {
