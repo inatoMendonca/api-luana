@@ -21,7 +21,7 @@ exports.buscarTodos = (request, response, next) => { // Método que busca todos 
         response.status(status.NOT_FOUND).send(); //Retorna bad request indicando que algum parâmetro está errado
     }
 
-    const ITENS_POR_PAGINA = 10;// Calcula a quantidade de itens por página
+    const ITENS_POR_PAGINA = 500;// Calcula a quantidade de itens por página
 
     limite = limite > ITENS_POR_PAGINA || limite <= 0 ? ITENS_POR_PAGINA : limite;
     pagina = pagina <= 0 ? 0 : pagina * limite;
