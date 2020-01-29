@@ -38,6 +38,10 @@ const Cliente = sequelize.define('clientes', {
         allowNull: false,
         type: Sequelize.STRING(50)
     },
+    dataNascimento: {
+        allowNull: true,
+        type: Sequelize.DATEONLY
+    },
 });
 
 module.exports = Cliente;

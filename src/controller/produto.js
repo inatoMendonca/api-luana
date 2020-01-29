@@ -33,14 +33,18 @@ exports.buscarTodos = (request, response, next) => { // Método que busca todos 
 
 exports.criar = (request, response, next) => {
     const nomeProduto = request.body.nomeProduto; // Captura os atributos do json
-    const valorProduto = request.body.valorProduto;
+    const valorCompraProduto = request.body.valorCompraProduto;
+    const valorVendaProduto = request.body.valorVendaProduto;
     const qtdeProduto = request.body.qtdeProduto;
+    const dataCompraProduto = request.body.dataCompraProduto;
     const obsProduto = request.body.obsProduto;
 
     Produto.create({ // Chama o metodo do Produto, passando o objeto montado;
         nomeProduto: nomeProduto,
-        valorProduto: valorProduto,
+        valorCompraProduto: valorCompraProduto,
+        valorVendaProduto: valorVendaProduto,
         qtdeProduto: qtdeProduto,
+        dataCompraProduto: dataCompraProduto,
         obsProduto: obsProduto
     }).then(() => {
         response.status(status.OK).send();// Retorna se a inserção for success
@@ -51,16 +55,20 @@ exports.atualizar = (request, response, next) => { // Quando atualizamos, enviam
     const id = request.params.id;
 
     const nomeProduto = request.body.nomeProduto; // Captura os atributos do json
-    const valorProduto = request.body.valorProduto;
+    const valorCompraProduto = request.body.valorCompraProduto;
+    const valorVendaProduto = request.body.valorVendaProduto;
     const qtdeProduto = request.body.qtdeProduto;
+    const dataCompraProduto = request.body.dataCompraProduto;
     const obsProduto = request.body.obsProduto;
 
     Produto.findByPk(id).then(produto => { // Combinamos os métodos findById e Update, validando se o ID para a alteração do registro existe
         if(produto) {
             Produto.update({ // Recebe dois parâmetros - 1 - recebe os dados novos e atribuem ao json para registro
                 nomeProduto: nomeProduto,
-                valorProduto: valorProduto,
+                valorCompraProduto: valorCompraProduto,
+                valorVendaProduto: valorVendaProduto,
                 qtdeProduto: qtdeProduto,
+                dataCompraProduto: dataCompraProduto,
                 obsProduto: obsProduto
                 },{where: {idProduto: id} } // 2 - Cláusula que relaciona o ID do parâmetro com o ID registrado no banco
             ).then(() => {

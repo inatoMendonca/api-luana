@@ -39,6 +39,7 @@ exports.criar = (request, response, next) => {
     const cpfCliente = request.body.cpfCliente;
     const enderecoCliente = request.body.enderecoCliente;
     const sexoCliente = request.body.sexoCliente;
+    const dataNascimento = request.body.dataNascimento;
 
     Cliente.create({ // Chama o metodo do Cliente, passando o objeto montado;
         nomeCliente: nomeCliente,
@@ -46,7 +47,8 @@ exports.criar = (request, response, next) => {
         foneCliente: foneCliente,
         cpfCliente: cpfCliente,
         enderecoCliente: enderecoCliente,
-        sexoCliente: sexoCliente
+        sexoCliente: sexoCliente,
+        dataNascimento: dataNascimento
     }).then(() => {
         response.status(status.OK).send();// Retorna se a inserção for success
     }).catch(error => next(error));
@@ -61,6 +63,7 @@ exports.atualizar = (request, response, next) => { // Quando atualizamos, enviam
     const cpfCliente = request.body.cpfCliente;
     const enderecoCliente = request.body.enderecoCliente;
     const sexoCliente = request.body.sexoCliente;
+    const dataNascimento = request.body.dataNascimento;
 
     Cliente.findByPk(id).then(cliente => { // Combinamos os métodos findById e Update, validando se o ID para a alteração do registro existe
         if(cliente) {
@@ -70,7 +73,8 @@ exports.atualizar = (request, response, next) => { // Quando atualizamos, enviam
                 foneCliente: foneCliente,
                 cpfCliente: cpfCliente,
                 enderecoCliente: enderecoCliente,
-                sexoCliente: sexoCliente
+                sexoCliente: sexoCliente,
+                dataNascimento: dataNascimento
                 },{where: {idCliente: id} } // 2 - Cláusula que relaciona o ID do parâmetro com o ID registrado no banco
             ).then(() => {
                 response.send(); // O send está com o status vazio porque o status 200 é padrão

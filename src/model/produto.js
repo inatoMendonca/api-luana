@@ -15,13 +15,21 @@ const Produto = sequelize.define('produtos', {
             len: [2,255]
         }
     },
-    valorProduto: {
-        allowNull: false,
+    valorCompraProduto: {
+        allowNull: true,
+        type: Sequelize.DECIMAL(10,2)
+    },
+    valorVendaProduto: {
+        allowNull: true,
         type: Sequelize.DECIMAL(10,2)
     },
     qtdeProduto: {
         allowNull: false,
         type: Sequelize.INTEGER
+    },
+    dataCompraProduto: {
+        allowNull: true,
+        type: Sequelize.DATEONLY
     },
     obsProduto: {
         allowNull: true,
