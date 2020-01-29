@@ -26,7 +26,7 @@ exports.buscarTodos = (request, response, next) => { // Método que busca todos 
     limite = limite > ITENS_POR_PAGINA || limite <= 0 ? ITENS_POR_PAGINA : limite;
     pagina = pagina <= 0 ? 0 : pagina * limite;
 
-    Cliente.findAll({limit: limite, offset: pagina}).then(clientes => { // Busca vários registros no banco que recebe um objeto com limit e offset, paginando os itens
+    Cliente.findAll({limit: limite, offset: pagina, order: [['nomeCliente']]}).then(clientes => { // Busca vários registros no banco que recebe um objeto com limit e offset, paginando os itens
         response.send(clientes);
     }).catch(error => next(error));
 };
