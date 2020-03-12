@@ -29,6 +29,18 @@ exports.buscarData = (request, response, next) => {
     })
 }
 
+exports.getRecibo = (request, response, next) => {//Método que busca um agendamento pelo ID
+    const id = request.params.id;
+
+    Agendamento.findByPk(id).then(agendamento => { //retorna uma promisse (programação assíncrona). O método then registra a requisição que acontece quando a promisse for resolvida
+        if(agendamento) {
+            response.send(agendamento);
+        } else {
+            response.status(status.NOT_FOUND).send();
+        }
+    }).catch(error => next(error)); // O Catch registra a requisição quando a promisse falhar.
+};
+
 exports.buscarUm = (request, response, next) => {//Método que busca um agendamento pelo ID
     const id = request.params.id;
 
@@ -54,7 +66,7 @@ exports.buscarTodos = (request, response, next) => { // Método que busca todos 
     limite = limite > ITENS_POR_PAGINA || limite <= 0 ? ITENS_POR_PAGINA : limite;
     pagina = pagina <= 0 ? 0 : pagina * limite;
 
-    Agendamento.findAll({where: {diaAgendamento: {[Op.gte]: new Date()}}, limit: limite, offset: pagina, order: [['diaAgendamento'],['inicioAgendamento']]}).then(agendamentos => { // Busca vários registros no banco que recebe um objeto com limit e offset, paginando os itens
+    Agendamento.findAll({where: {diaAgendamento: {[Op.gte]: new Date()}, valorAgendamento: null}, limit: limite, offset: pagina, order: [['diaAgendamento'],['inicioAgendamento']]}).then(agendamentos => { // Busca vários registros no banco que recebe um objeto com limit e offset, paginando os itens
         response.send(agendamentos);
     }).catch(error => next(error));
 };
@@ -67,6 +79,8 @@ exports.criar = (request, response, next) => {
     const inicioAgendamento = request.body.inicioAgendamento;
     const fimAgendamento = request.body.fimAgendamento;
     const obsAgendamento = request.body.obsAgendamento;
+    const valorAgendamento = request.body.valorAgendamento;
+    const formaPagamento = request.body.formaPagamento;
 
     Agendamento.create({ // Chama o metodo do Agendamento, passando o objeto montado;
         nomeCliente: nomeCliente,
@@ -75,7 +89,9 @@ exports.criar = (request, response, next) => {
         diaAgendamento: diaAgendamento,
         inicioAgendamento: inicioAgendamento,
         fimAgendamento: fimAgendamento,
-        obsAgendamento: obsAgendamento
+        obsAgendamento: obsAgendamento,
+        valorAgendamento: valorAgendamento,
+        formaPagamento: formaPagamento
     }).then(() => {
         response.status(status.OK).send();// Retorna se a inserção for success
     }).catch(error => next(error));
@@ -91,6 +107,8 @@ exports.atualizar = (request, response, next) => { // Quando atualizamos, enviam
     const inicioAgendamento = request.body.inicioAgendamento;
     const fimAgendamento = request.body.fimAgendamento;
     const obsAgendamento = request.body.obsAgendamento;
+    const valorAgendamento = request.body.valorAgendamento;
+    const formaPagamento = request.body.formaPagamento;
 
     Agendamento.findByPk(id).then(agendamento => { // Combinamos os métodos findById e Update, validando se o ID para a alteração do registro existe
         if(agendamento) {
@@ -101,7 +119,9 @@ exports.atualizar = (request, response, next) => { // Quando atualizamos, enviam
                 diaAgendamento: diaAgendamento,
                 inicioAgendamento: inicioAgendamento,
                 fimAgendamento: fimAgendamento,
-                obsAgendamento: obsAgendamento
+                obsAgendamento: obsAgendamento,
+                valorAgendamento: valorAgendamento,
+                formaPagamento: formaPagamento
                 },{where: {idAgendamento: id} } // 2 - Cláusula que relaciona o ID do parâmetro com o ID registrado no banco
             ).then(() => {
                 response.send(); // O send está com o status vazio porque o status 200 é padrão

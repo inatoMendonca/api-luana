@@ -41,6 +41,14 @@ const Agendamento = sequelize.define('agendamentos', {
     obsAgendamento: {
         allowNull: true,
         type: Sequelize.STRING(500)
+    },
+    valorAgendamento: {
+        allowNull: true,
+        type: Sequelize.DECIMAL(10,2)
+    },
+    formaPagamento: {
+        allowNull: true,
+        type: Sequelize.STRING(20)
     }
 });
 
